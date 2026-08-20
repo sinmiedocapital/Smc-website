@@ -163,7 +163,30 @@
       font-size: 1.2rem;
       max-width: 720px;
       color: rgba(26, 29, 36, 0.85);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .market-thesis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 920px;
+      margin: 0 0 2rem;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .thesis-line {
+      padding: 1rem 1.25rem 1rem 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .thesis-line + .thesis-line {
+      padding-left: 1.25rem;
+      border-left: 1px solid var(--border-subtle);
     }
 
     /* Primary Links / Channels */
@@ -193,6 +216,19 @@
       background-color: var(--brass-gold);
       color: var(--ink-navy);
       border-color: var(--brass-gold);
+    }
+
+    .btn-call {
+      background-color: var(--brass-gold);
+      color: var(--ink-navy);
+      border: 1px solid var(--brass-gold);
+    }
+
+    .btn-call:hover {
+      background-color: var(--ink-navy);
+      color: var(--warm-paper);
+      border-color: var(--ink-navy);
+      transform: translateY(-2px);
     }
 
     .btn-secondary {
@@ -309,6 +345,17 @@
       .channel-strip {
         flex-direction: column;
       }
+      .market-thesis {
+        grid-template-columns: 1fr;
+      }
+      .thesis-line {
+        padding: 0.9rem 0;
+      }
+      .thesis-line + .thesis-line {
+        padding-left: 0;
+        border-left: 0;
+        border-top: 1px solid var(--border-subtle);
+      }
       .btn {
         text-align: center;
       }
@@ -327,6 +374,7 @@
       <nav class="nav-links">
         <a href="#offerings">Offerings</a>
         <a href="#channels">Ecosystem</a>
+        <a href="https://calendly.com/tradeinmotions-qsan/smc-discovery-clone" target="_blank" rel="noopener noreferrer">Discovery Call</a>
       </nav>
     </div>
   </header>
@@ -354,14 +402,21 @@
     <!-- Hero / Funnel Core -->
     <section class="hero">
       <div class="meta-date">EDITORIAL INTELLIGENCE & ADVISORY</div>
-      <h1>Centralizing macro analysis, continuous trade education, and high-ticket execution coaching.</h1>
-      <p>We build sustainable market revenue through direct trading, publish deep-dive financial writing, and partner directly with operators and traders ready to scale.</p>
+      <h1>Macro context. Technical confirmation. Disciplined execution.</h1>
+      <p>We trade directly, publish deep-dive financial writing, and work alongside operators and traders who want a clearer framework for navigating the markets.</p>
+
+      <div class="market-thesis" aria-label="Our market approach">
+        <div class="thesis-line">Clarity comes before positioning.</div>
+        <div class="thesis-line">Macro defines the environment.</div>
+        <div class="thesis-line">Technical structure and our indicators confirm the setup.</div>
+      </div>
       
       <div class="channel-strip" id="channels">
-        <a href="https://discord.com/invite/52MJhJagh" target="_blank" class="btn btn-primary">Join Discord Community</a>
-        <a href="https://substack.com/@sinmiedocapital" target="_blank" class="btn btn-secondary">Substack Publication</a>
-        <a href="https://medium.com/@sinmmiedocapital" target="_blank" class="btn btn-secondary">Medium Insights</a>
-        <a href="https://www.instagram.com/sinmiedocapital" target="_blank" class="btn btn-secondary">Instagram</a>
+        <a href="https://calendly.com/tradeinmotions-qsan/smc-discovery-clone" target="_blank" rel="noopener noreferrer" class="btn btn-call">Book a 15-Min Discovery Call</a>
+        <a href="https://discord.com/invite/52MJhJagh" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Join Discord Community</a>
+        <a href="https://substack.com/@sinmiedocapital" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Substack Publication</a>
+        <a href="https://medium.com/@sinmmiedocapital" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Medium Insights</a>
+        <a href="https://www.instagram.com/sinmiedocapital" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Instagram</a>
       </div>
     </section>
 
@@ -371,11 +426,11 @@
       
       <div class="card">
         <div>
-          <div class="card-meta">HIGH-TICKET ADVISORY</div>
+          <div class="card-meta">PRIVATE ADVISORY</div>
           <h3>1-on-1 Coaching & Strategy</h3>
           <p>Direct mentorship for dedicated traders and entrepreneurs. Refine execution systems, streamline risk frameworks, and overcome scale bottlenecks.</p>
         </div>
-        <a href="https://discord.com/invite/52MJhJagh" target="_blank" class="card-action">Apply via Discord &rarr;</a>
+        <a href="https://calendly.com/tradeinmotions-qsan/smc-discovery-clone" target="_blank" rel="noopener noreferrer" class="card-action">Book a 15-minute call &rarr;</a>
       </div>
 
       <div class="card">
@@ -384,7 +439,7 @@
           <h3>Substack & Medium</h3>
           <p>Weekly editorial analysis, macro breakdowns, and trade recaps available via free and premium subscription tiers.</p>
         </div>
-        <a href="https://substack.com/@sinmiedocapital" target="_blank" class="card-action">Read & Subscribe &rarr;</a>
+        <a href="https://substack.com/@sinmiedocapital" target="_blank" rel="noopener noreferrer" class="card-action">Read & Subscribe &rarr;</a>
       </div>
 
       <div class="card">
@@ -393,7 +448,7 @@
           <h3>TradingView Indicators</h3>
           <p>Access our custom indicator suite built to simplify market structure and high-probability setup recognition. Free during current rollout.</p>
         </div>
-        <a href="https://discord.com/invite/52MJhJagh" target="_blank" class="card-action">Get Access in Discord &rarr;</a>
+        <a href="https://discord.com/invite/52MJhJagh" target="_blank" rel="noopener noreferrer" class="card-action">Get Access in Discord &rarr;</a>
       </div>
 
     </section>
