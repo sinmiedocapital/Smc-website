@@ -106,6 +106,10 @@
       animation: ticker 35s linear infinite;
     }
 
+    .ticker-wrap:hover .ticker {
+      animation-play-state: paused;
+    }
+
     .ticker-item {
       display: inline-block;
       padding: 0 1.5rem;
@@ -120,6 +124,10 @@
 
     .down { color: var(--signal-red); }
     .up { color: var(--signal-green); }
+
+    .ticker-note {
+      color: rgba(237, 233, 222, 0.55);
+    }
 
     @keyframes ticker {
       0% { transform: translate3d(0, 0, 0); }
@@ -380,21 +388,12 @@
   </header>
 
   <!-- Terminal Ticker Strip -->
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <div class="ticker-item"><span class="ticker-symbol">SPY</span> 512.40 <span class="up">+0.42%</span></div>
-      <div class="ticker-item"><span class="ticker-symbol">QQQ</span> 438.10 <span class="up">+0.81%</span></div>
-      <div class="ticker-item"><span class="ticker-symbol">US10Y</span> 4.22% <span class="down">-0.05</span></div>
-      <div class="ticker-item"><span class="ticker-symbol">DXY</span> 104.15 <span class="down">-0.18%</span></div>
-      <div class="ticker-item"><span class="ticker-symbol">BTC/USD</span> 64,200 <span class="up">+2.10%</span></div>
-      <div class="ticker-item"><span class="ticker-symbol">VIX</span> 13.85 <span class="down">-2.40%</span></div>
-      <!-- Duplicated for seamless loop -->
-      <div class="ticker-item"><span class="ticker-symbol">SPY</span> 512.40 <span class="up">+0.42%</span></div>
-      <div class="ticker-item"><span class="ticker-symbol">QQQ</span> 438.10 <span class="up">+0.81%</span></div>
-      <div class="ticker-item"><span class="ticker-symbol">US10Y</span> 4.22% <span class="down">-0.05</span></div>
-      <div class="ticker-item"><span class="ticker-symbol">DXY</span> 104.15 <span class="down">-0.18%</span></div>
-      <div class="ticker-item"><span class="ticker-symbol">BTC/USD</span> 64,200 <span class="up">+2.10%</span></div>
-      <div class="ticker-item"><span class="ticker-symbol">VIX</span> 13.85 <span class="down">-2.40%</span></div>
+  <div class="ticker-wrap" title="Daily change versus the previous close. Market data may be delayed.">
+    <div class="ticker" id="market-ticker" aria-label="Loading current market data">
+      <div class="ticker-item"><span class="ticker-symbol">MARKETS</span> Loading daily moves…</div>
+      <div class="ticker-item ticker-note">Data may be delayed</div>
+      <div class="ticker-item"><span class="ticker-symbol">MARKETS</span> Loading daily moves…</div>
+      <div class="ticker-item ticker-note">Data may be delayed</div>
     </div>
   </div>
 
@@ -460,6 +459,53 @@
       <div class="footer-copy">Built for disciplined traders and entrepreneurs.</div>
     </div>
   </footer>
+
+  <script>
+    const ticker = document.getElementById('market-ticker');
+
+    const formatPrice = (market) => {
+      if (market.format === 'yield') {
+        return `${market.price.toFixed(2)}%`;
+      }
+
+      return new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: market.format === 'bitcoin' ? 0 : 2,
+        maximumFractionDigits: market.format === 'bitcoin' ? 0 : 2,
+      }).format(market.price);
+    };
+
+    const renderTicker = (markets, updatedAt) => {
+      const marketItems = markets.map((market) => {
+        const direction = market.changePercent >= 0 ? 'up' : 'down';
+        const sign = market.changePercent >= 0 ? '+' : '';
+        return `<div class="ticker-item"><span class="ticker-symbol">${market.label}</span> ${formatPrice(market)} <span class="${direction}">${sign}${market.changePercent.toFixed(2)}%</span></div>`;
+      }).join('');
+      const note = '<div class="ticker-item ticker-note">Daily move • delayed data</div>';
+
+      ticker.innerHTML = `${marketItems}${note}${marketItems}${note}`;
+      ticker.setAttribute('aria-label', `Current market data. Last refreshed ${new Date(updatedAt).toLocaleString()}.`);
+    };
+
+    const loadMarketData = async () => {
+      try {
+        const response = await fetch('/api/market-data', { headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error('Market data request failed');
+
+        const payload = await response.json();
+        if (!Array.isArray(payload.markets) || payload.markets.length === 0) {
+          throw new Error('Market data response was empty');
+        }
+
+        renderTicker(payload.markets, payload.updatedAt);
+      } catch (error) {
+        ticker.innerHTML = '<div class="ticker-item"><span class="ticker-symbol">MARKETS</span> Daily data temporarily unavailable</div><div class="ticker-item ticker-note">Please check back shortly</div><div class="ticker-item"><span class="ticker-symbol">MARKETS</span> Daily data temporarily unavailable</div><div class="ticker-item ticker-note">Please check back shortly</div>';
+        ticker.setAttribute('aria-label', 'Market data is temporarily unavailable.');
+      }
+    };
+
+    loadMarketData();
+    window.setInterval(loadMarketData, 15 * 60 * 1000);
+  </script>
 
 </body>
 </html>
