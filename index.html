@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sin Miedo Capital | Market Intelligence & Elite Coaching</title>
+  
+  <!-- Typography: Fraunces, IBM Plex Sans, IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink-navy: #0E1A2B;
+      --warm-paper: #EDE9DE;
+      --paper-card: #E4DFD3;
+      --deep-charcoal: #1A1D24;
+      --brass-gold: #B08D57;
+      --signal-red: #A6291C;
+      --signal-green: #2B7A4B;
+      --border-subtle: rgba(26, 29, 36, 0.12);
+      --border-dark: rgba(237, 233, 222, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--warm-paper);
+      color: var(--deep-charcoal);
+      font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Masthead */
+    header {
+      background-color: var(--ink-navy);
+      color: var(--warm-paper);
+      padding: 2.5rem 1.5rem 2rem;
+      border-bottom: 3px solid var(--brass-gold);
+    }
+
+    .masthead-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .brand-title {
+      font-family: 'Fraunces', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+      color: var(--warm-paper);
+    }
+
+    .brand-tagline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--brass-gold);
+      margin-top: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    .nav-links a {
+      color: var(--warm-paper);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--brass-gold);
+    }
+
+    /* Ticker Strip */
+    .ticker-wrap {
+      width: 100%;
+      background-color: #070D16;
+      border-bottom: 1px solid var(--border-subtle);
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      padding: 0.5rem 0;
+    }
+
+    .ticker {
+      display: inline-block;
+      animation: ticker 35s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-block;
+      padding: 0 1.5rem;
+      color: var(--warm-paper);
+    }
+
+    .ticker-symbol {
+      font-weight: 600;
+      color: var(--brass-gold);
+      margin-right: 0.4rem;
+    }
+
+    .down { color: var(--signal-red); }
+    .up { color: var(--signal-green); }
+
+    @keyframes ticker {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+
+    /* Layout Containers */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .hero {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .meta-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--brass-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 3rem;
+      line-height: 1.15;
+      font-weight: 600;
+      max-width: 880px;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 720px;
+      color: rgba(26, 29, 36, 0.85);
+      margin-bottom: 2rem;
+    }
+
+    /* Primary Links / Channels */
+    .channel-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .btn {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 2px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--ink-navy);
+      color: var(--warm-paper);
+      border: 1px solid var(--ink-navy);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brass-gold);
+      color: var(--ink-navy);
+      border-color: var(--brass-gold);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--deep-charcoal);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--deep-charcoal);
+      background-color: var(--paper-card);
+    }
+
+    /* Section Grid */
+    .section-header {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--deep-charcoal);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--deep-charcoal);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .card {
+      background-color: var(--paper-card);
+      padding: 1.75rem;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--brass-gold);
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      line-height: 1.25;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: rgba(26, 29, 36, 0.8);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-action {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--ink-navy);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink-navy);
+      width: fit-content;
+      padding-bottom: 2px;
+    }
+
+    .card-action:hover {
+      color: var(--brass-gold);
+      border-color: var(--brass-gold);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--ink-navy);
+      color: var(--warm-paper);
+      padding: 3rem 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      color: rgba(237, 233, 222, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .masthead-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .hero h1 {
+        font-size: 2.1rem;
+      }
+      .channel-strip {
+        flex-direction: column;
+      }
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Masthead -->
+  <header>
+    <div class="masthead-container">
+      <div>
+        <div class="brand-title">Sin Miedo Capital</div>
+        <div class="brand-tagline">Trading • Intelligence • Execution</div>
+      </div>
+      <nav class="nav-links">
+        <a href="#offerings">Offerings</a>
+        <a href="#channels">Ecosystem</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Terminal Ticker Strip -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <div class="ticker-item"><span class="ticker-symbol">SPY</span> 512.40 <span class="up">+0.42%</span></div>
+      <div class="ticker-item"><span class="ticker-symbol">QQQ</span> 438.10 <span class="up">+0.81%</span></div>
+      <div class="ticker-item"><span class="ticker-symbol">US10Y</span> 4.22% <span class="down">-0.05</span></div>
+      <div class="ticker-item"><span class="ticker-symbol">DXY</span> 104.15 <span class="down">-0.18%</span></div>
+      <div class="ticker-item"><span class="ticker-symbol">BTC/USD</span> 64,200 <span class="up">+2.10%</span></div>
+      <div class="ticker-item"><span class="ticker-symbol">VIX</span> 13.85 <span class="down">-2.40%</span></div>
+      <!-- Duplicated for seamless loop -->
+      <div class="ticker-item"><span class="ticker-symbol">SPY</span> 512.40 <span class="up">+0.42%</span></div>
+      <div class="ticker-item"><span class="ticker-symbol">QQQ</span> 438.10 <span class="up">+0.81%</span></div>
+      <div class="ticker-item"><span class="ticker-symbol">US10Y</span> 4.22% <span class="down">-0.05</span></div>
+      <div class="ticker-item"><span class="ticker-symbol">DXY</span> 104.15 <span class="down">-0.18%</span></div>
+      <div class="ticker-item"><span class="ticker-symbol">BTC/USD</span> 64,200 <span class="up">+2.10%</span></div>
+      <div class="ticker-item"><span class="ticker-symbol">VIX</span> 13.85 <span class="down">-2.40%</span></div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero / Funnel Core -->
+    <section class="hero">
+      <div class="meta-date">EDITORIAL INTELLIGENCE & ADVISORY</div>
+      <h1>Centralizing macro analysis, continuous trade education, and high-ticket execution coaching.</h1>
+      <p>We build sustainable market revenue through direct trading, publish deep-dive financial writing, and partner directly with operators and traders ready to scale.</p>
+      
+      <div class="channel-strip" id="channels">
+        <a href="https://discord.com/invite/52MJhJagh" target="_blank" class="btn btn-primary">Join Discord Community</a>
+        <a href="https://substack.com/@sinmiedocapital" target="_blank" class="btn btn-secondary">Substack Publication</a>
+        <a href="https://medium.com/@sinmmiedocapital" target="_blank" class="btn btn-secondary">Medium Insights</a>
+        <a href="https://www.instagram.com/sinmiedocapital" target="_blank" class="btn btn-secondary">Instagram</a>
+      </div>
+    </section>
+
+    <!-- Services & Monetization Funnel Grid -->
+    <div class="section-header" id="offerings">Core Ecosystem & Offerings</div>
+    <section class="grid">
+      
+      <div class="card">
+        <div>
+          <div class="card-meta">HIGH-TICKET ADVISORY</div>
+          <h3>1-on-1 Coaching & Strategy</h3>
+          <p>Direct mentorship for dedicated traders and entrepreneurs. Refine execution systems, streamline risk frameworks, and overcome scale bottlenecks.</p>
+        </div>
+        <a href="https://discord.com/invite/52MJhJagh" target="_blank" class="card-action">Apply via Discord &rarr;</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta">RECURRING PUBLICATIONS</div>
+          <h3>Substack & Medium</h3>
+          <p>Weekly editorial analysis, macro breakdowns, and trade recaps available via free and premium subscription tiers.</p>
+        </div>
+        <a href="https://substack.com/@sinmiedocapital" target="_blank" class="card-action">Read & Subscribe &rarr;</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta">CHARTER TOOLING</div>
+          <h3>TradingView Indicators</h3>
+          <p>Access our custom indicator suite built to simplify market structure and high-probability setup recognition. Free during current rollout.</p>
+        </div>
+        <a href="https://discord.com/invite/52MJhJagh" target="_blank" class="card-action">Get Access in Discord &rarr;</a>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div>SIN MIEDO CAPITAL &copy; 2026</div>
+      <div class="footer-copy">Built for disciplined traders and entrepreneurs.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
