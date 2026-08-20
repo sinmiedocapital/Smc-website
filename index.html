@@ -112,36 +112,39 @@
       color: var(--brass-gold);
     }
 
-    .ticker-wrap {
+    .market-tape {
       width: 100%;
       overflow: hidden;
-      white-space: nowrap;
       background: var(--night);
       border-bottom: 1px solid var(--border-subtle);
+      min-height: 68px;
+    }
+
+    .tradingview-widget-container {
+      width: 100%;
+    }
+
+    .tradingview-widget-container__widget {
+      min-height: 46px;
+    }
+
+    .tradingview-widget-copyright {
+      padding: 0.15rem 1rem 0.35rem;
+      background: var(--night);
+      color: rgba(237, 233, 222, 0.5);
       font-family: "IBM Plex Mono", monospace;
-      font-size: 0.7rem;
-      padding: 0.55rem 0;
+      font-size: 0.62rem;
+      line-height: 1;
+      text-align: right;
     }
 
-    .ticker {
-      display: inline-block;
-      animation: ticker 32s linear infinite;
-    }
-
-    .ticker-item {
-      display: inline-block;
-      padding: 0 1.8rem;
-      color: rgba(237, 233, 222, 0.72);
-    }
-
-    .ticker-symbol {
+    .tradingview-widget-copyright a {
       color: var(--brass-gold);
-      font-weight: 600;
-      margin-right: 0.45rem;
+      text-decoration: none;
     }
 
-    @keyframes ticker {
-      to { transform: translate3d(-50%, 0, 0); }
+    .tradingview-widget-copyright a:hover {
+      color: var(--warm-paper);
     }
 
     main {
@@ -155,10 +158,6 @@
     }
 
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.55fr) minmax(250px, 0.65fr);
-      gap: 4rem;
-      align-items: end;
       padding-bottom: 4rem;
       border-bottom: 1px solid var(--border-subtle);
     }
@@ -221,22 +220,6 @@
 
     .btn-secondary:hover {
       background: var(--paper-card);
-    }
-
-    .hero-note {
-      border-top: 2px solid var(--deep-charcoal);
-      padding-top: 1rem;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.75rem;
-      line-height: 1.7;
-    }
-
-    .hero-note strong {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: var(--signal-red);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
     }
 
     .section-block {
@@ -479,12 +462,10 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .ticker { animation: none; }
     }
 
     @media (max-width: 820px) {
       .masthead-container,
-      .hero,
       .section-heading,
       .about-panel,
       .outcomes,
@@ -499,10 +480,6 @@
       .nav-links,
       .footer-links {
         justify-content: flex-start;
-      }
-
-      .hero {
-        gap: 2.5rem;
       }
 
       .card {
@@ -583,18 +560,31 @@
     </div>
   </header>
 
-  <div class="ticker-wrap" aria-label="Trading principles">
-    <div class="ticker">
-      <span class="ticker-item"><span class="ticker-symbol">01</span>Risk before reward</span>
-      <span class="ticker-item"><span class="ticker-symbol">02</span>Process over prediction</span>
-      <span class="ticker-item"><span class="ticker-symbol">03</span>Discipline over impulse</span>
-      <span class="ticker-item"><span class="ticker-symbol">04</span>Clarity over noise</span>
-      <span class="ticker-item"><span class="ticker-symbol">05</span>Education before execution</span>
-      <span class="ticker-item"><span class="ticker-symbol">01</span>Risk before reward</span>
-      <span class="ticker-item"><span class="ticker-symbol">02</span>Process over prediction</span>
-      <span class="ticker-item"><span class="ticker-symbol">03</span>Discipline over impulse</span>
-      <span class="ticker-item"><span class="ticker-symbol">04</span>Clarity over noise</span>
-      <span class="ticker-item"><span class="ticker-symbol">05</span>Education before execution</span>
+  <div class="market-tape" aria-label="Current market overview">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" target="_blank" rel="noopener noreferrer">Market data by TradingView</a></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          { "description": "SPY", "proName": "AMEX:SPY" },
+          { "description": "QQQ", "proName": "NASDAQ:QQQ" },
+          { "description": "US 10Y", "proName": "TVC:US10Y" },
+          { "description": "DXY", "proName": "TVC:DXY" },
+          { "description": "BTC/USD", "proName": "COINBASE:BTCUSD" },
+          { "description": "VIX", "proName": "CBOE:VIX" },
+          { "description": "WTI", "proName": "TVC:USOIL" },
+          { "description": "IBEX 35", "proName": "BME:IBC" },
+          { "description": "Gold", "proName": "OANDA:XAUUSD" },
+          { "description": "Silver", "proName": "OANDA:XAGUSD" }
+        ],
+        "showSymbolLogo": false,
+        "isTransparent": true,
+        "displayMode": "adaptive",
+        "colorTheme": "dark",
+        "locale": "en"
+      }
+      </script>
     </div>
   </div>
 
@@ -603,7 +593,7 @@
       <div>
         <div class="eyebrow">Trader Education & Market Literacy</div>
         <h1 id="hero-title">Trade with a process you can explain.</h1>
-        <p class="hero-copy">Sin Miedo Capital helps self-directed traders strengthen risk frameworks, develop steadier psychology, and learn to use SMC indicators with intention—not impulse.</p>
+        <p class="hero-copy">Develop a repeatable approach grounded in risk management, trading psychology, market structure, and practical SMC indicator education.</p>
 
         <div class="channel-strip" aria-label="Sin Miedo Capital channels">
           <a href="https://discord.com/invite/52MJhJagh" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Join the Discord</a>
@@ -613,10 +603,6 @@
         </div>
       </div>
 
-      <aside class="hero-note" aria-label="Educational use notice">
-        <strong>Education, not execution.</strong>
-        We do not manage accounts, accept custody of funds, place trades, or provide personalized instructions to buy, sell, or hold financial instruments.
-      </aside>
     </section>
 
     <section class="section-block" id="education" aria-labelledby="education-title">
@@ -630,7 +616,7 @@
           <div>
             <div class="card-meta">Private Trader Education</div>
             <h3>1-on-1 Process Coaching</h3>
-            <p>Structured education focused on risk rules, trading psychology, journaling, process review, and effective use of SMC indicators. You remain fully responsible for every trading decision.</p>
+            <p>Structured coaching focused on risk rules, trading psychology, journaling, process review, and effective use of SMC indicators.</p>
           </div>
           <a href="https://discord.com/invite/52MJhJagh" target="_blank" rel="noopener noreferrer" class="card-action">Explore coaching details &rarr;</a>
         </article>
@@ -681,7 +667,7 @@
         <div class="outcome-lead">
           <div class="section-kicker">Our Standard</div>
           <blockquote>Better questions. Clearer rules. Fewer emotional decisions.</blockquote>
-          <p>We do not publish profit promises or manufactured success stories. Any future member testimonials belong here only when they are genuine, permissioned, and centered on the educational experience.</p>
+          <p>Progress looks different for every trader. Our work focuses on the habits, frameworks, and tool fluency that support more deliberate decisions.</p>
         </div>
         <div class="outcome-list">
           <div class="outcome-item">
