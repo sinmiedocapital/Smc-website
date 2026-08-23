@@ -22,9 +22,73 @@
       --accent-green: #10B981;
       --accent-red: #EF4444;
       --accent-amber: #F59E0B;
+      --surface-deep: #06080C;
+      --header-bg: rgba(10, 13, 18, 0.95);
+      --text-strong: #FFF;
+      --button-bg: #FFF;
+      --button-text: #000;
+      --button-hover: #E2E8F0;
+      --subtle-bg: rgba(255, 255, 255, 0.01);
+      --disclaimer-bg: rgba(17, 22, 32, 0.5);
       --font-mono: 'JetBrains Mono', monospace;
       --font-serif: 'Newsreader', serif;
       --font-sans: 'Inter', sans-serif;
+      color-scheme: dark;
+    }
+
+    html[data-theme="light"] {
+      --bg-color: #EEEADE;
+      --card-bg: #F7F3E9;
+      --border-color: #D6D3C9;
+      --border-accent: #B68E51;
+      --text-main: #171C24;
+      --text-muted: #43444A;
+      --text-dim: #806B4E;
+      --accent-green: #025C3C;
+      --accent-red: #D12A2A;
+      --accent-amber: #B68E51;
+      --surface-deep: #060C16;
+      --header-bg: rgba(12, 25, 44, 0.98);
+      --text-strong: #171C24;
+      --button-bg: #0C192C;
+      --button-text: #F4F0E7;
+      --button-hover: #172334;
+      --subtle-bg: rgba(12, 25, 44, 0.025);
+      --disclaimer-bg: rgba(247, 243, 233, 0.62);
+      color-scheme: light;
+    }
+
+    html[data-theme="light"] header .brand-title,
+    html[data-theme="light"] header nav a {
+      color: #F4F0E7;
+    }
+
+    html[data-theme="light"] header .brand-subtitle,
+    html[data-theme="light"] header nav a:last-child {
+      color: var(--accent-amber);
+    }
+
+    html[data-theme="light"] .theme-toggle {
+      color: #F4F0E7;
+      border-color: rgba(182, 142, 81, 0.65);
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    html[data-theme="light"] .theme-toggle:hover {
+      color: #FFF;
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    html[data-theme="light"] .ticker-item {
+      color: #D6D3C9;
+    }
+
+    html[data-theme="light"] .ticker-item span.symbol {
+      color: var(--accent-amber);
+    }
+
+    html[data-theme="light"] footer {
+      color: #AFA99E;
     }
 
     * {
@@ -39,12 +103,13 @@
       font-family: var(--font-sans);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     /* Header */
     header {
       border-bottom: 1px solid var(--border-color);
-      background-color: rgba(10, 13, 18, 0.95);
+      background-color: var(--header-bg);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -66,7 +131,7 @@
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: #FFF;
+      color: var(--text-strong);
     }
 
     .brand-subtitle {
@@ -86,13 +151,59 @@
     }
 
     nav a:hover {
-      color: #FFF;
+      color: var(--text-strong);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-toggle {
+      width: 2.25rem;
+      height: 2.25rem;
+      margin-left: 1.25rem;
+      border: 1px solid var(--border-color);
+      border-radius: 2px;
+      background-color: var(--subtle-bg);
+      color: var(--text-muted);
+      display: inline-grid;
+      place-items: center;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      color: var(--text-strong);
+      border-color: var(--border-accent);
+      background-color: var(--card-bg);
+      transform: translateY(-1px);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--accent-amber);
+      outline-offset: 3px;
+    }
+
+    .theme-toggle svg {
+      width: 1rem;
+      height: 1rem;
+      stroke: currentColor;
+    }
+
+    .theme-toggle .moon-icon,
+    html[data-theme="light"] .theme-toggle .sun-icon {
+      display: none;
+    }
+
+    html[data-theme="light"] .theme-toggle .moon-icon {
+      display: block;
     }
 
     /* Ticker Tape */
     .ticker-wrap {
       width: 100%;
-      background-color: #06080C;
+      background-color: var(--surface-deep);
       border-bottom: 1px solid var(--border-color);
       overflow: hidden;
       white-space: nowrap;
@@ -113,7 +224,7 @@
     }
 
     .ticker-item span.symbol {
-      color: #FFF;
+      color: var(--text-strong);
       font-weight: 600;
       margin-right: 0.4rem;
     }
@@ -159,7 +270,7 @@
       font-size: 2.8rem;
       font-weight: 400;
       line-height: 1.25;
-      color: #FFF;
+      color: var(--text-strong);
       margin-bottom: 1.5rem;
       max-width: 900px;
     }
@@ -182,8 +293,8 @@
     .cta-button-primary {
       display: inline-flex;
       align-items: center;
-      background-color: #FFF;
-      color: #000;
+      background-color: var(--button-bg);
+      color: var(--button-text);
       font-family: var(--font-mono);
       font-weight: 600;
       font-size: 0.9rem;
@@ -196,7 +307,7 @@
     }
 
     .cta-button-primary:hover {
-      background-color: var(--text-main);
+      background-color: var(--button-hover);
       transform: translateY(-1px);
     }
 
@@ -216,12 +327,12 @@
       padding: 0.5rem 0.85rem;
       border-radius: 2px;
       transition: all 0.2s ease;
-      background-color: rgba(255, 255, 255, 0.01);
+      background-color: var(--subtle-bg);
     }
 
     .social-link:hover {
       border-color: var(--border-accent);
-      color: #FFF;
+      color: var(--text-strong);
       background-color: var(--card-bg);
     }
 
@@ -258,7 +369,7 @@
     .why-title {
       font-family: var(--font-serif);
       font-size: 2rem;
-      color: #FFF;
+      color: var(--text-strong);
       margin-bottom: 1rem;
     }
 
@@ -311,7 +422,7 @@
       font-family: var(--font-sans);
       font-size: 1.25rem;
       font-weight: 600;
-      color: #FFF;
+      color: var(--text-strong);
       margin-bottom: 0.75rem;
     }
 
@@ -325,7 +436,7 @@
     .card-link {
       font-family: var(--font-mono);
       font-size: 0.85rem;
-      color: #FFF;
+      color: var(--text-strong);
       text-decoration: none;
       font-weight: 500;
       display: inline-flex;
@@ -345,7 +456,7 @@
     }
 
     .disclaimer-box {
-      background-color: rgba(17, 22, 32, 0.5);
+      background-color: var(--disclaimer-bg);
       border: 1px solid var(--border-color);
       padding: 1.5rem;
       border-radius: 3px;
@@ -374,7 +485,7 @@
     /* Footer */
     footer {
       border-top: 1px solid var(--border-color);
-      background-color: #06080C;
+      background-color: var(--surface-deep);
       padding: 2.5rem 2rem;
       font-family: var(--font-mono);
       font-size: 0.8rem;
@@ -395,6 +506,8 @@
       .hero h1 { font-size: 2rem; }
       .nav-container { flex-direction: column; align-items: flex-start; gap: 1rem; }
       nav a { margin-left: 0; margin-right: 1rem; }
+      .nav-actions { width: 100%; justify-content: space-between; }
+      .theme-toggle { margin-left: 0; }
     }
   </style>
 </head>
@@ -407,11 +520,21 @@
         <div class="brand-title">Sin Miedo Capital</div>
         <div class="brand-subtitle">Intelligence • Process • Execution</div>
       </div>
-      <nav>
-        <a href="#about">Philosophy</a>
-        <a href="#offerings">Offerings</a>
-        <a href="https://calendly.com/tradeinmotions-qsan/15min" target="_blank" style="color: var(--accent-amber);">Discovery Call</a>
-      </nav>
+      <div class="nav-actions">
+        <nav>
+          <a href="#offerings">Offerings</a>
+          <a href="https://calendly.com/tradeinmotions-qsan/15min" target="_blank" style="color: var(--accent-amber);">Discovery Call</a>
+        </nav>
+        <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false" title="Switch to light mode">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20.5 14.25A8.5 8.5 0 0 1 9.75 3.5 8.5 8.5 0 1 0 20.5 14.25Z"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -515,6 +638,28 @@
       <div>Built for disciplined traders and entrepreneurs.</div>
     </div>
   </footer>
+
+  <script>
+    const themeToggle = document.querySelector('.theme-toggle');
+    const savedTheme = localStorage.getItem('sin-miedo-theme');
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+
+    function setTheme(theme) {
+      const isLight = theme === 'light';
+      document.documentElement.dataset.theme = theme;
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggle.setAttribute('aria-label', `Switch to ${isLight ? 'dark' : 'light'} mode`);
+      themeToggle.setAttribute('title', `Switch to ${isLight ? 'dark' : 'light'} mode`);
+    }
+
+    setTheme(savedTheme || preferredTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      localStorage.setItem('sin-miedo-theme', nextTheme);
+      setTheme(nextTheme);
+    });
+  </script>
 
 </body>
 </html>
