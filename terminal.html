@@ -1,1 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal | Sin Miedo Capital</title>
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #0A0D12;
+      --card-bg: #111620;
+      --border-color: #1E2638;
+      --border-accent: #2A364F;
+      --text-main: #E2E8F0;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --accent-green: #10B981;
+      --accent-red: #EF4444;
+      --accent-amber: #F59E0B;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Newsreader', serif;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      border-bottom: 1px solid var(--border-color);
+      background-color: rgba(10, 13, 18, 0.95);
+      backdrop-filter: blur(8px);
+      flex-shrink: 0;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-link {
+      text-decoration: none;
+      display: block;
+    }
+
+    .brand-title {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #FFF;
+    }
+
+    .brand-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .back-link {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: #FFF;
+    }
+
+    /* Tab bar */
+    .tab-bar {
+      border-bottom: 1px solid var(--border-color);
+      background-color: #06080C;
+      flex-shrink: 0;
+      overflow-x: auto;
+    }
+
+    .tab-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      padding: 0 1.5rem;
+    }
+
+    .tab-btn {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      color: #FFF;
+      border-bottom-color: var(--accent-amber);
+    }
+
+    /* Dashboard viewport */
+    .dash-area {
+      flex: 1;
+      position: relative;
+      min-height: 0;
+    }
+
+    .dash-frame {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+      background-color: var(--bg-color);
+    }
+
+    .dash-frame.active {
+      display: block;
+    }
+
+    /* Fallback shown if a dashboard fails to load in-frame */
+    .dash-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      text-align: center;
+      background-color: var(--bg-color);
+    }
+
+    .dash-fallback.active {
+      display: flex;
+    }
+
+    .dash-fallback p {
+      color: var(--text-muted);
+      max-width: 480px;
+      font-size: 0.95rem;
+    }
+
+    .dash-fallback a {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #000;
+      background-color: #FFF;
+      text-decoration: none;
+      padding: 0.7rem 1.25rem;
+      border-radius: 2px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .brand-title { font-size: 0.9rem; }
+      .tab-btn { padding: 0.85rem 1rem; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="/index.html" class="brand-link">
+        <div class="brand-title">Sin Miedo Capital</div>
+        <div class="brand-subtitle">Client Terminal</div>
+      </a>
+      <div class="header-actions">
+        <a href="/index.html" class="back-link">← Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tab bar -->
+  <nav class="tab-bar">
+    <div class="tab-container" id="tabContainer">
+      <!-- Tabs are injected by JS from the DASHBOARDS list below -->
+    </div>
+  </nav>
+
+  <!-- Dashboard viewport -->
+  <div class="dash-area" id="dashArea">
+    <!-- Iframes + fallbacks are injected by JS -->
+  </div>
+
+  <script>
+    // ---------------------------------------------------------------
+    // Dashboard registry. Update `url` here if any dashboard moves.
+    // Each one loads in an iframe; if a host blocks framing (X-Frame-
+    // Options / CSP frame-ancestors), the iframe silently stays blank,
+    // so we also render a fallback "open in new tab" card underneath
+    // that becomes visible if you click Diagnose (see below) or if you
+    // just notice a blank pane and want a manual escape hatch.
+    // ---------------------------------------------------------------
+    const DASHBOARDS = [
+      {
+        id: 'ibex',
+        label: 'IBEX Macro Wind',
+        url: 'https://claude.ai/public/artifacts/987cb88b-708c-44d8-92ff-01cf5fb9a401'
+      },
+      {
+        id: 'oilwar',
+        label: 'Oil War Tracker',
+        url: 'https://iran-shadowfleet.pplx.app/#/'
+      },
+      {
+        id: 'yen',
+        label: 'Yen Intervention',
+        url: 'https://www.perplexity.ai/computer/a/d2821c65-4942-4407-a692-772d568811ff'
+      },
+      {
+        id: 'warrisk',
+        label: 'Macro War-Risk Desk',
+        url: 'https://sinmiedocapital.base44.app'
+      },
+      {
+        id: 'futures',
+        label: 'SMC Futures',
+        url: 'https://smcfutures.base44.app'
+      }
+    ];
+
+    const tabContainer = document.getElementById('tabContainer');
+    const dashArea = document.getElementById('dashArea');
+    const loaded = {};
+
+    DASHBOARDS.forEach((d, i) => {
+      // Tab button
+      const btn = document.createElement('button');
+      btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
+      btn.textContent = d.label;
+      btn.dataset.target = d.id;
+      btn.addEventListener('click', () => activate(d.id));
+      tabContainer.appendChild(btn);
+
+      // Iframe
+      const frame = document.createElement('iframe');
+      frame.className = 'dash-frame' + (i === 0 ? ' active' : '');
+      frame.id = 'frame-' + d.id;
+      frame.title = d.label;
+      frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      if (i === 0) frame.src = d.url;
+      dashArea.appendChild(frame);
+
+      // Fallback card — always in the DOM as a safety net if a host
+      // blocks embedding outright; toggled manually via the link below
+      // the tab bar isn't wired by default since JS can't detect an
+      // X-Frame-Options refusal. If a tab shows blank, use "Open in
+      // new tab" below the frame instead.
+      const fallback = document.createElement('div');
+      fallback.className = 'dash-fallback';
+      fallback.id = 'fallback-' + d.id;
+      fallback.innerHTML =
+        '<p>If ' + d.label + ' isn\'t loading here, its host may be blocking inline embedding. Open it directly instead.</p>' +
+        '<a href="' + d.url + '" target="_blank" rel="noopener">Open ' + d.label + ' →</a>';
+      dashArea.appendChild(fallback);
+    });
+
+    function activate(id) {
+      DASHBOARDS.forEach(d => {
+        const isTarget = d.id === id;
+        document.querySelector('.tab-btn[data-target="' + d.id + '"]').classList.toggle('active', isTarget);
+        const frame = document.getElementById('frame-' + d.id);
+        frame.classList.toggle('active', isTarget);
+        if (isTarget && !loaded[d.id]) {
+          frame.src = d.url;
+          loaded[d.id] = true;
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
